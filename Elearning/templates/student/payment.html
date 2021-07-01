@@ -1,0 +1,326 @@
+<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content%}
+
+<div class="card">
+    <div class="card-top border-bottom text-center"> <a href="{% url 'login' %}"> </a> <span id="logo"></span> </div>
+    <div class="card-body">
+        <!-- <div class="row upper"> <span></span> <span> Order details</span> <span id="payment"></span>Payment</span> </div> -->
+        <span id="passerror"></span>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="right border">
+                    <div class="header">Select Payment</div>
+                    <br>
+
+                  <label><h4>Paypal</h4><i class="fab fa-paypal" style="font-size:80px"></i><input type="radio" name="pay" id="pal" value="paypal"></label>  
+                  <label><img class="img-fluid" src="/media/media/razorpay.png"><br><input type="radio" name="pay" id="raz" value="razorpay"></label>
+
+            
+                   
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="left border">
+                    <div class="row"> <span class="header">Order Summary</span>
+                        <!-- <div class="icons"> <img src="https://img.icons8.com/color/48/000000/visa.png" /> <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /> <img src="https://img.icons8.com/color/48/000000/maestro.png" /> </div> -->
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>student_name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{student.user.username}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>mobile_number</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{student.mobile_number}}</p>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Standard</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{myclass.standard}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Subjects</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>-{{myclass.sub1}}</p>
+                            <p>-{{myclass.sub2}}</p>
+                            <p>-{{myclass.sub3}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>duration</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{myclass.duration}} Month</p>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                    <b><h6 class="card-text" style="color: green;">
+                        Total Amount for your course :
+                        <strong id="total-amount" >{{myclass.price}} </strong> rs
+                    </h6></b>
+                    <div class="row lower">
+                        <div class="col text-left"><a href="">
+                     <button class="btn" onclick="order()" >Place order</button>
+                        </a></div>
+                    </div>
+                
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div> </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+    function order(){
+        console.log("hello")
+        var value = $("input[type='radio'][name='pay']:checked").val();
+        data = {
+            'value' :value
+        }
+        if (value == "input[name='pay']:checked") {
+            $('#passerror').html("select payment method")
+    
+        }
+        $.ajax({
+            url:'/orderpayment/',
+            method: 'GET',
+            data :data,
+            datatype :'json',
+            success:function(data){
+                console.log("jaiii")
+                if(data== 'paypal'){
+                    console.log("paypal")
+                    window.location.replace('/paypal/')
+                }
+                else if(data== 'razorpay'){
+                    window.location.replace('/razorpay/')
+                }
+                else if(data== 'false') {       
+                    window.alert('select payment method')
+                    window.location.replace('/payment/')
+                }
+            }
+        })
+    
+    }  
+    
+    </script>
+
+
+
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(0, 0, 34);
+        font-size: 0.8rem
+    }
+    
+    .card {
+        max-width: 1000px;
+        margin: 2vh
+    }
+    
+    .card-top {
+        padding: 0.7rem 5rem
+    }
+    
+    .card-top a {
+        float: left;
+        margin-top: 0.7rem
+    }
+    
+    #logo {
+        font-family: 'Dancing Script';
+        font-weight: bold;
+        font-size: 1.6rem
+    }
+    
+    .card-body {
+        padding: 0 5rem 5rem 5rem;
+        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+    
+    @media(max-width:768px) {
+        .card-body {
+            padding: 0 1rem 1rem 1rem;
+            background-image: url("https://i.imgur.com/4bg1e6u.jpg");
+            background-size: cover;
+            background-repeat: no-repeat
+        }
+    
+        .card-top {
+            padding: 0.7rem 1rem
+        }
+    }
+    
+    .row {
+        margin: 0
+    }
+    
+    .upper {
+        padding: 1rem 0;
+        justify-content: space-evenly
+    }
+    
+    #three {
+        border-radius: 1rem;
+        width: 22px;
+        height: 22px;
+        margin-right: 3px;
+        border: 1px solid blue;
+        text-align: center;
+        display: inline-block
+    }
+    
+    #payment {
+        margin: 0;
+        color: blue
+    }
+    
+    .icons {
+        margin-left: auto
+    }
+    
+    form span {
+        color: rgb(179, 179, 179)
+    }
+    
+    form {
+        padding: 2vh 0
+    }
+    
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+    
+    input:focus::-webkit-input-placeholder {
+        color: transparent
+    }
+    
+    .header {
+        font-size: 1.5rem
+    }
+    
+    .left {
+        background-color: #ffffff;
+        padding: 2vh
+    }
+    
+    .left img {
+        width: 2rem
+    }
+    
+    .left .col-4 {
+        padding-left: 0
+    }
+    
+    .right .item {
+        padding: 0.3rem 0
+    }
+    
+    .right {
+        background-color: #ffffff;
+        padding: 2vh
+    }
+    
+    .col-8 {
+        padding: 0 1vh
+    }
+    
+    .lower {
+        line-height: 2
+    }
+    
+    .btn {
+        background-color: rgb(23, 4, 189);
+        border-color: rgb(23, 4, 189);
+        color: white;
+        width: 100%;
+        font-size: 0.7rem;
+        margin: 4vh 0 1.5vh 0;
+        padding: 1.5vh;
+        border-radius: 0
+    }
+    
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        -webkit-user-select: none;
+        transition: none
+    }
+    
+    .btn:hover {
+        color: white
+    }
+    
+    a {
+        color: black
+    }
+    
+    a:hover {
+        color: black;
+        text-decoration: none
+    }
+    
+    input[type=checkbox] {
+        width: unset;
+        margin-bottom: unset
+    }
+    
+    #cvv {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575), rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center
+    }
+    
+    #cvv:hover {}
+</style>
+
+
+
+{% endblock %}

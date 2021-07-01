@@ -1,0 +1,446 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .block1{
+    background: -webkit-linear-gradient(left, #f88b55, #FF6699);
+    color: rgb(250, 250, 250) ;
+    width: 600pxpx;
+    height: 200px;
+    margin: 30px;
+    border-radius: 20%;
+    text-align: center;
+  
+   
+  }
+  .block2{
+    background: -webkit-linear-gradient(left, #56cef3, #236bd8);
+    color: white ;
+    width: 600pxpx;
+    height: 200px;
+    margin: 30px;
+    border-radius: 20%;
+    text-align: center;
+
+  }
+
+  .block3{
+    background: -webkit-linear-gradient(left, #1ce2c8, #09968f);
+    color: white ;
+    width: 600pxpx;
+    height: 200px;
+    margin: 30px;
+    border-radius: 20%;
+    text-align: center;
+
+   
+  }
+  .fas {
+    font-size: 3rem;
+    padding-top: 60px;
+
+  }
+
+  #main{
+    background-color: rgb(248, 248, 246);
+  }
+
+
+
+  .box  {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #f3f0f7;
+    padding: 2px 25px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+.lable{
+  color: #046e69;
+  padding-left: 45%;
+  font-size: x-large;
+  font-weight: 800;
+  
+}
+
+
+</style>
+
+
+<div class="site-wrap" id="home-section">
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+
+
+
+  <header class="site-navbar site-navbar-target" role="banner">
+
+
+    <div class="container">
+      <div class="menu-wrap d-flex align-items-center">
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-black site-menu-toggle js-menu-toggle py-5"><span class="icon-menu h3 text-black"></span></a></span>
+
+          
+
+          <nav class="site-navigation text-left mr-auto d-none d-lg-block" role="navigation">
+            
+            <ul class="site-menu main-menu js-clone-nav mr-auto ">
+                
+              <li class="active"><a href="index.html" class="nav-link">Home</a></li>
+              <li><a href="about.html" class="nav-link">About</a></li>
+              <li><a href="packages.html" class="nav-link">Packages</a></li>
+              <li><a href="" class="nav-link">teacher</a></li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'Logout' %}" class="nav-link">Logout</a></li>
+              <li><a href="{% url 'student_profile' %}" class="nav-link">Account</a></li>
+              <b><label class="text-cursive h5 text-red" style="font-size: 1.5rem; font-weight: bolder;" >
+                
+                Hai {{user.username}}</label></b>
+
+              {% else %}
+              <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+              {% endif %}
+
+             
+            </ul>
+          
+          </nav>
+
+          <div class="top-social ml-auto">
+            <a href="#"><span class="icon-facebook text-teal"></span></a>
+            <a href="#"><span class="icon-twitter text-success"></span></a>
+            <a href="#"><span class="icon-linkedin text-yellow"></span></a>
+          </div>
+      </div>
+    </div>
+
+   
+
+  </header>
+
+<div class="ftco-blocks-cover-1">
+   
+  <div class="site-section-cover overlay">
+    <div class="container">
+      <div class="row align-items-center ">
+        <div class="col-md-5 mt-5 pt-5">
+          <span class="text-cursive h5 text-red">Welcome To Our Website</span>
+          
+         
+  <h5 style="color: red;">{{student.student_name}}</h5>
+          
+          <h1 class="mb-3 font-weight-bold text-teal">Bring Fun Life To Your Kids</h1>
+          <p>Amazing Playground for your kids</p>
+          <p class="mt-5"><a href="#" class="btn btn-primary py-4 btn-custom-1">Learn More</a></p>
+        </div>
+        <div class="col-md-6 ml-auto align-self-end">
+          <img src="{% static 'student/images/kid_transparent.png' %}" alt="Image" class="img-fluid">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% if students.standard != None %}
+
+<!----subjects-->
+
+
+<div class="site-section">
+  <div class="container" id="main">
+    <label class="lable">SUBJECTS</label>
+    <div class="row">
+      <div class="col-lg-4">
+        
+        <div class="block1">
+          <div>
+            <i class="fas fa-divide"></i>
+          </div>
+          <h4>{{subjects.sub1}}</h4>
+          <a href="{% url 'subject1_tutorials' %}"><input type="submit"  class="box" name="" value="GO" id="sub" ></a>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-4">
+        
+        <div class="block2">
+          <div>
+            <i class="fas fa-ad"></i>
+          </div>
+          <h4>{{subjects.sub2}}</h4>
+          <a href="subject2_tutorials"><input type="submit"  class="box" name="" value="GO" id="sub" ></a>
+        </div>
+
+      </div> 
+      
+      <div class="col-lg-4">
+        
+        <div class="block3">
+          <div>
+            <i class="fas fa-globe"></i>
+         </div>
+          <h4>{{subjects.sub3}}</h4>
+          <a href="subject3_tutorials"><input type="submit"  class="box" name="" value="GO" id="sub" ></a>
+        </div>
+
+      </div>    
+      
+    </div>    
+  </div>      
+</div>
+
+<!---end-->
+{% else %}
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      {% for myclass in Myclass %}
+      <div class="col-lg-3  pt-5">
+        <div class="block-2 teal" style="border-radius: 25px;" >          
+          <span class="wrap-icon">
+          </span>
+          <img src="{{ myclass.imgurl5}}"  alt=""   width="200" height="200"/>
+          <h2 style="padding-top: 5px;">{{myclass.standard}}</h2>
+
+         <a href="{% url 'standard_details' pk=myclass.id %}"><input type="submit"  class="box" name="" value="details" id="sub" ></a>
+
+        </div>
+      </div>
+      <br><br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-5 mb-md-0">
+        <img src="{% static 'student/images/img_1.jpg' %}" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-md-5 ml-auto pl-md-5">
+        <span class="text-cursive h5 text-red">About Us</span>
+        <h3 class="text-black">Bring Fun Life To Your Kids</h3>
+        <p><span>A pioneer in ECCE (Early Childhood Care and Education), we are the largest preschool chain in Asia. With an incredible network of more than 1900+ centers in over 750+ cities, we are committed to spearheading child development across the nation. Having touched the lives of more than 9,00,000 children in India, Kidzee, a decade on, remains focussed on nurturing the ‘unique potential’ in every child..</span></p>
+
+        <p class="mt-5"><a href="#" class="btn btn-warning py-4 btn-custom-1">More About Us</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="site-section bg-info">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <span class="text-cursive h5 text-red d-block">Packages You Like</span>
+        <h2 class="text-white">Our Packages</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="package text-center bg-white">
+          <span class="img-wrap"><img src="{% static 'student/images/flaticon/svg/001-jigsaw.svg' %}" alt="Image" class="img-fluid"></span>
+          <h3 class="text-teal">Indoor Games</h3>
+          <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p>
+          <p><a href="#" class="btn btn-primary btn-custom-1 mt-4">Learn More</a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="package text-center bg-white">
+          <span class="img-wrap"><img src="{% static 'student/images/flaticon/svg/002-target.svg' %}" alt="Image" class="img-fluid"></span>
+          <h3 class="text-success">Outdoor Game and Event</h3>
+          <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p>
+          <p><a href="#" class="btn btn-warning btn-custom-1 mt-4">Learn More</a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="package text-center bg-white">
+          <span class="img-wrap"><img src="{% static 'student/images/flaticon/svg/003-mission.svg' %}" alt="Image" class="img-fluid"></span>
+          <h3 class="text-danger">Camping for Kids</h3>
+          <p>Lorem ipsum dolor sit amet. Consequatur aliquam, fuga maiores amet quo corporis distinctio soluta recusandae?</p>
+          <p><a href="#" class="btn btn-success btn-custom-1 mt-4">Learn More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <span class="text-cursive h5 text-red d-block">Testimonial</span>
+        <h2 class="text-black">What Our Client Says About Us</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="testimonial-3-wrap">
+          
+
+          <div class="owl-carousel nonloop-block-13">
+            <div class="testimonial-3 d-flex">
+              <div class="vcard-wrap mr-5">
+                <img src="{% static 'student/images/person_1.jpg' %}" alt="Image" class="vcard img-fluid">
+              </div>
+              <div class="text">
+                <h3>Jeff Woodland</h3>
+                <p class="position">Partner</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam earum libero rem maxime magnam. Similique esse ab earum, autem consectetur.</p>
+              </div>
+            </div>
+
+            <div class="testimonial-3 d-flex">
+              <div class="vcard-wrap mr-5">
+                <img src="{% static 'student/images/person_3.jpg' %}" alt="Image" class="vcard img-fluid">
+              </div>
+              <div class="text">
+                <h3>Jeff Woodland</h3>
+                <p class="position">Partner</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam earum libero rem maxime magnam. Similique esse ab earum, autem consectetur.</p>
+              </div>
+            </div>
+
+            <div class="testimonial-3 d-flex">
+              <div class="vcard-wrap mr-5">
+                <img src="{% static 'student/images/person_2.jpg' %}" alt="Image" class="vcard img-fluid">
+              </div>
+              <div class="text">
+                <h3>Jeff Woodland</h3>
+                <p class="position">Partner</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam earum libero rem maxime magnam. Similique esse ab earum, autem consectetur.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+
+      <div class="col-md-8">
+        
+
+        <div class="row">
+          <div class="col-lg-3 text-center">
+            <span class="text-teal h2 d-block">3423</span>
+            <span>Happy Client</span>
+          </div>
+          <div class="col-lg-3 text-center">
+            <span class="text-yellow h2 d-block">4398</span>
+            <span>Members</span>
+          </div>
+          <div class="col-lg-3 text-center">
+            <span class="text-success h2 d-block">50+</span>
+            <span>Staffs</span>
+          </div>
+          <div class="col-lg-3 text-center">
+            <span class="text-danger h2 d-block">2000+</span>
+            <span>Our Followers</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="site-section py-5 bg-warning">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 d-flex">
+      <h2 class="text-white m-0">Bring Fun Life To Your Kids</h2>
+      <a href="#" class="btn btn-primary btn-custom-1 py-3 px-5 ml-auto">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2 class="footer-heading mb-3">About Us</h2>
+            <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+
+            <h2 class="footer-heading mb-4">Newsletter</h2>
+            <form action="#" class="d-flex" class="subscribe">
+              <input type="text" class="form-control mr-3" placeholder="Email">
+              <input type="submit" value="Send" class="btn btn-primary">
+            </form>
+      </div>
+      <div class="col-lg-8 ml-auto">
+        <div class="row">
+          <div class="col-lg-4 ml-auto">
+            <h2 class="footer-heading mb-4">Navigation</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Testimonials</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h2 class="footer-heading mb-4">Navigation</h2>
+            <ul class="list-unstyled">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Testimonials</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+            
+          </div>
+
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 mt-5 text-center">
+      <div class="col-md-12">
+        <div class="border-top pt-5">
+          <p>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+</div>
+{% endblock %}

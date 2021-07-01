@@ -1,0 +1,24 @@
+<html>
+    <head>razorpay</head>
+    <body>
+        <form action="/razorpaysuccess/" method="POST">
+            <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_S4jImSJqPEDLju"
+                data-amount="{% widthratio payment 1 100 %}"  
+                data-currency="INR" 
+                
+                data-buttontext="Pay with Razorpay"
+                data-name="{{student.parent_name}}"
+                data-description="payment for school"
+                data-image="https://example.com/your_logo.jpg"
+                data-prefill.name="{{student.parent_name}}"
+                data-prefill.email="{{student.email}}"
+                data-theme.color="#F37254"
+            ></script>
+            <input type="hidden" custom="Hidden Element" name="hidden">
+            </form>
+            
+        
+    </body>
+</html>

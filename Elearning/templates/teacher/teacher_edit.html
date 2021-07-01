@@ -1,0 +1,345 @@
+<style>
+	.note
+	{
+		text-align: center;
+		padding-top:10px;
+		height: 80px;
+		background: -webkit-linear-gradient(left, #3e4e63, #d6d2d8);
+		color: #fff;
+		font-weight: bold;
+		line-height: 80px;
+	}
+	.form-content
+	{
+		padding: 5%;
+		border: 1px solid #ced4da;
+		margin-bottom: 2%;
+	}
+	.form-control{
+		border-radius:1.5rem;
+	}
+	.btnSubmit
+	{
+		border:none;
+		border-radius:1.5rem;
+		padding: 1%;
+		width: 20%;
+		cursor: pointer;
+		background: #0062cc;
+		color: #fff;
+	}
+	.error{
+		color: darkred;
+		}
+	
+		
+
+</style>
+
+
+
+{% extends 'teacher/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+<div class="col-12">
+
+    <div class="form">
+        <div class="note">
+            <h3>Edit Profile</h3>
+        </div>
+        <form>
+            {% csrf_token %}
+            
+
+
+        <div class="form-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">  
+                        <input type="text" class="form-control" value="{{teacher.full_name}}"    placeholder="Full_name" name="full_name" id="full_name" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="text" class="form-control" value="{{teacher.username}}"  placeholder="username" name="username" id="username" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="email" class="form-control" value="{{teacher.email}}"  placeholder="email" name="email" id="email" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control" value="{{teacher.mobile_number}}"  placeholder="mobile_number" name="mobile_number" id="mobile_number" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control" value="{{teacher.qualification}}"  placeholder="qualification" name="qualification" id="qualification">
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control" value="{{teacher.experience}}"  placeholder="experience" name="experience" id="experience">
+                    </div>
+
+                      <!-- <div class="form-group">
+                        <label for="exampleFormControlSelect1"  placeholder="standard" ></label>
+                        <p>Select standard</p>
+                        <select class="form-control" value=""  name="standard" id="standard" >
+                            {% for myclass in Myclass %}
+                            
+                            <option>{{ myclass.standard }}</option>
+                                
+                            {% endfor %}
+                        </select>
+                      </div> -->
+
+                    <!-- <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="password"  row="3" name="password" >
+                    </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password2" placeholder="confirm_password"  row="3" name="password2" >
+                </div> -->
+
+                    
+                <span id="error1" class="error" > </span><br>
+            
+                <button type="button" id="createBtn"   class="btn btn-primary">update</button><br><br>
+                <a href="{% url 'Teacher' %}"class="btn btn-danger"  data-title="cancel">cancel</a>	       
+                    
+
+                
+
+                
+        </div>
+        </div>
+      </div>
+    </form>
+
+    <form>
+        <h4>password Change</h4>
+
+        <div class="form-group">
+                        <input type="password" class="form-control" id="old_password" name="old_password" placeholder="old_Password"  row="3"  >
+                    </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password1" placeholder="new_password"  row="3" name="password1" >
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password2" placeholder="confirm_password"  row="3" name="password2" >
+                </div> 
+                <span id="error2" class="error" ></span>
+
+                <br>
+                <button type="button" id="createBtn2"   class="btn btn-primary">change</button><br><br>
+
+
+    </form>
+
+    </div>
+
+       
+    </div>
+    
+
+
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->
+</div>
+</div>
+
+
+   
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+    <script>
+		$('#createBtn').click(function(){
+
+            var full_name=$('#full_name').val()
+			var username=$('#username').val()
+			var email=$('#email').val()
+            var atposition=email.indexOf('@')
+			var dotposition=email.indexOf('.')
+			var mobile_number=$('#mobile_number').val()
+			var qualification=$('#qualification').val()
+			var experience=$('#experience').val()
+			//var standard=$('#standard').val()
+            //var password1=$('#password').val()
+            //var password2=$('#password2').val()
+            //var image=$('#image').val()
+		
+	
+			var data = {
+				'csrfmiddlewaretoken' : '{{csrf_token}}',
+				'full_name1' :full_name,
+				'username1' :username,
+				'email1' :email,
+                'mobile_number1' :mobile_number,
+				'qualification1' :qualification,
+				'experience1' :experience,
+				//'standard1' :standard,
+                //'password1' :password1,
+                //'password2' :password2,
+                //'image1' :image,//
+
+	
+			}
+			if (full_name === ""){
+				$('#error1').html("enter full_name")
+			}
+			else if (username === ""){
+                console.log("mandan")
+				$('#error1').html("enter username ")
+			}
+			else if (email === ""){
+				$('#error1').html("enter email ")
+				console.log("haii")
+			}
+
+            else if (atposition<2 ||dotposition<atposition+2 || dotposition+2>=email.length){
+				$('#error1').html("enter enter valid email")
+			}
+
+			else if (mobile_number === ""){
+				$('#error1').html("enter mobile number")
+			}
+			
+			else if (qualification === ""){
+				$('#erro1').html("enter qualification")
+			}
+			else if (experience === ""){
+				$('#error1').html("enter experience")
+			}
+			
+           
+            
+
+			else{
+				console.log('hiiiiiiiiiiiiiii')
+				$.ajax({
+					
+					url:'/teacher/teacher_edit/',
+					method:'POST',
+					data: data,
+					dataType: 'json',
+					
+					success:function(data){
+						if(data =="true"){
+							alert("updated");
+							window.location.replace('/teacher/teacher_profile/')
+						}
+						else if (data == "false1"){
+							$("#error1").html('usernmae already exist')
+						}
+						
+						else if (data == "false2"){
+                            $("#error1").html('This email already exist')
+                        }
+						
+						else if (data == "false3"){
+							$('#error1').html('This number already exist')
+						}
+                        
+						
+						
+	
+					}
+				})
+			}
+	
+	
+		})
+	
+	
+	</script>
+
+
+    
+
+
+    <script>
+
+        $('#createBtn2').click(function(){
+            var password1= $('#password1').val()
+            var password2= $('#password2').val()
+            var old_password = $('#old_password').val()
+            var password_length = $('#password1').val().length
+     
+            var data = {
+             'csrfmiddlewaretoken' : '{{csrf_token}}',
+             'password1' :password1,
+             'passwords' :old_password
+     
+            }
+     
+            if (password_length<5){
+                $('#error2').html('password contain 5 characters')
+            }
+            else if (password1!=password2){
+                $('#error2').html('password does not match')
+            }
+     
+            else{
+     
+             $.ajax({
+                 url :'/teacher/password_edit/',
+                 method :'POST',
+                 data : data,
+                 dataType : 'json',
+                 success:function(data){
+                     if(data=='true'){
+                         alert("password changed")
+                         window.location.replace('/teacher/teacher_profile/')
+                         
+                     }
+                 }
+             })
+            }
+        }) 
+     
+     </script>
+
+    
+
+
+{% endblock %}

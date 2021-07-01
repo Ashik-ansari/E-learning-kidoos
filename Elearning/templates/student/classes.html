@@ -1,0 +1,78 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="note">
+    <u><p class="label1">{{sub}}</p></u>
+
+</div>
+
+<br>
+<div class="row" style="margin-left: 10px;">
+    {% for tuto in tutorials %}
+        <div class="col-lg-3">
+            
+            <div class="" >
+                <br>
+                
+                <video src="{{tuto.videourl1}}" style="width: 200px; height: 120px;"  class="" poster="{{tuto.standard.imgurl5}}"   controls></video>
+                
+                    <label style="width: 220px; color: rgb(15, 4, 6); ">{{tuto.chapter}}-{{tuto.description}}</label>
+                  
+                              
+              </div>
+             
+        </div>
+        
+        
+        {% endfor %}
+      </div>
+
+
+      <style>
+    
+        .label1{
+            color: #f7f5f2;
+            font-weight: bolder;
+            font-size: xx-large;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            
+        }
+    
+        .video {
+            max-width: 100%;
+
+        }
+        
+        .button{
+            color: lightseagreen;
+        }  
+        .but{
+            margin-left: 80%;
+            background-color: rgb(41, 96, 247);
+        }
+        .block2{
+            background: -webkit-linear-gradient(left, #6cf0b9, #69bb61);
+            color: rgb(69, 145, 158) ;
+            width: 600pxpx;
+            height: 200px;
+            margin: 30px;
+            border-radius: 20%;
+            text-align: center;
+        
+          }
+        .note
+        {
+            text-align: center;
+            padding-top:10px;
+            height: 80px;
+            background: -webkit-linear-gradient(left, #df7803, #d31111);
+           
+            color: #fff;
+            font-weight: bold;
+            line-height: 80px;
+        }
+    
+    </style>  
+
+{% endblock %}

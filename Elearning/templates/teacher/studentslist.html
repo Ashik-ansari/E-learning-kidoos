@@ -1,0 +1,95 @@
+<script src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+
+{% extends 'teacher/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Students</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Students</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                       
+                        <h6 class="card-title m-t-40"><i class="m-r-5 font-18 mdi mdi-numeric-1-box-multiple-outline"></i> Table With Outside Padding</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>student_name</th>
+                                        <th>student_age</th>
+                                        <th>parent_name</th>
+                                        <th>username</th>
+                                        <th>Email</th>
+                                        <th>mobile_number</th>
+                                        <th>standard</th>
+                                       
+
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for student in  students  %}
+                                    <tr>
+                                    
+                                      <td>{{student.student_name}}</td>
+                                      <td>{{student.student_age}}</td>
+                                      <td>{{student.parent_name}}</td>
+                                      <td>{{student.user.username}}</td>
+                                      <td>{{student.user.email}}</td>
+                                      <td>{{student.mobile_number}}</td>
+                                      <td>{{student.standard.standard}}</td>
+                                     
+                                    
+                                      <!-- {% if student.active == True %}                          
+                                      <td scope="row" data-label="blockuser">  <a href="{%  url 'blockstudent' pk=student.id %}" class="fas fa-lock-open"></a></i></td>				
+                                     {% else %}
+                                     <td scope="row" data-label="blockuser"> <a href="{%  url 'blockstudent' pk=student.id %}" class="fas fa-lock"></a></i></td>
+                                         {% endif %}	
+                                     <td scope="row" data-label="userdelete"><a href="{%  url 'studentdelete' pk=student.id %}" class="fas fa-trash-alt"></a></i></td>							
+                                               -->
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                        
+
+
+
+{% endblock %}

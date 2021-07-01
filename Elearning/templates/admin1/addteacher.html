@@ -1,0 +1,361 @@
+
+
+<style>
+	.note
+	{
+		text-align: center;
+		padding-top:10px;
+		height: 80px;
+		background: -webkit-linear-gradient(left, #3e4e63, #d6d2d8);
+		color: #fff;
+		font-weight: bold;
+		line-height: 80px;
+	}
+	.form-content
+	{
+		padding: 5%;
+		border: 1px solid #ced4da;
+		margin-bottom: 2%;
+	}
+	.form-control{
+		border-radius:1.5rem;
+	}
+	.btnSubmit
+	{
+		border:none;
+		border-radius:1.5rem;
+		padding: 1%;
+		width: 20%;
+		cursor: pointer;
+		background: #0062cc;
+		color: #fff;
+	}
+	.error{
+		color: darkred;
+		}
+	
+		
+
+</style>
+
+
+
+{% extends 'admin1/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Teacher</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+<div class="col-12">
+
+    <div class="form">
+        <div class="note">
+            <h3>Add Teacher</h3>
+        </div>
+        <form>
+            
+
+
+        <div class="form-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">  
+                        <input type="text" class="form-control"   placeholder="Full_name" name="full_name" id="full_name" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="text" class="form-control"   placeholder="username" name="username" id="username" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="email" class="form-control"   placeholder="email" name="email" id="email" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control"   placeholder="mobile_number" name="mobile_number" id="mobile_number" >
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control"   placeholder="qualification" name="qualification" id="qualification">
+                    </div>
+
+                    <div class="form-group">  
+                        <input type="tel" class="form-control"   placeholder="experience" name="experience" id="experience">
+                    </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1"  placeholder="standard" ></label>
+                        <p>Select standard</p>
+                        <select class="form-control"  name="standard" id="standard" >
+                            {% for myclass in Myclass %}
+                            
+                            <option>{{ myclass.standard }}</option>
+                                
+                            {% endfor %}
+                        </select>
+                      </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="password"  row="3" name="password" >
+                    </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password2" placeholder="confirm_password"  row="3" name="password2" >
+                </div>
+
+                   
+                <span id="error1" class="error" > </span><br>
+            
+                <button type="button" id="createBtn"   class="btn btn-primary">Submit</button><br><br>
+                <a href="{% url 'Teacher' %}"class="btn btn-danger"  data-title="cancel">cancel</a>	       
+                
+                
+
+                
+        </div>
+        </div>
+      </div>
+    </form>
+    </div>
+
+       
+    </div>
+    
+
+
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Right sidebar -->
+<!-- ============================================================== -->
+<!-- .right-sidebar -->
+<!-- ============================================================== -->
+<!-- End Right sidebar -->
+<!-- ============================================================== -->
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script> -
+
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
+
+   
+    <!-- <script>
+        var imgSrc;
+        let result = document.querySelector(".result"),
+            save = document.querySelector(".save"),
+            cropped = document.querySelector(".cropped"),
+            upload = document.querySelector("#image1"),
+            cropper = "";
+
+        upload.addEventListener("change", (e) => {
+			console.log("ashuj")
+            if (e.target.files.length) {
+                // start file reader
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    if (e.target.result) {
+                        // create new image
+                        $("#exampleModalCenter").modal("show");
+                        let img = document.createElement("img");
+                        img.id = "image";
+                        img.src = e.target.result;
+
+                        // clean result before
+                        result.innerHTML = "";
+                        // append new image
+
+                        result.appendChild(img);
+                        // init cropper
+                        cropper = new Cropper(img, {
+                            viewMode: 2,
+                            aspectRatio: 5 / 5,
+                            autoCropArea: 1,
+							cropBoxResizable: false,
+                            crop: function (e) {
+                                console.log(e.detail.x);
+                                console.log(e.detail.y);
+                            }
+                        });
+
+                    }
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        save.addEventListener("click", (e) => {
+            e.preventDefault();
+            // get result to data uri
+            imgSrc = cropper
+                .getCroppedCanvas({
+                    width: 300, // img disp value
+                })
+                .toDataURL();
+            $("#exampleModalCenter").modal("hide");
+            cropped.src = imgSrc;
+
+        });
+
+
+		function openImage1() {
+			
+			$('#image1').click()
+		}
+
+
+    </script> -->
+
+    <!--jquery-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+    <script>
+		$('#createBtn').click(function(){
+	
+			var full_name=$('#full_name').val()
+			var username=$('#username').val()
+			var email=$('#email').val()
+            var atposition=email.indexOf('@')
+			var dotposition=email.indexOf('.')
+			var mobile_number=$('#mobile_number').val()
+			var qualification=$('#qualification').val()
+			var experience=$('#experience').val()
+			var standard=$('#standard').val()
+            var password1=$('#password').val()
+            var password2=$('#password2').val()
+            //var image=$('#image').val()
+		
+	
+			var data = {
+				'csrfmiddlewaretoken' : '{{csrf_token}}',
+				'full_name1' :full_name,
+				'username1' :username,
+				'email1' :email,
+                'mobile_number1' :mobile_number,
+				'qualification1' :qualification,
+				'experience1' :experience,
+				'standard1' :standard,
+                'password1' :password1,
+                'password2' :password2,
+                //'image1' :image,//
+
+	
+			}
+			if (full_name === ""){
+				$('#error1').html("enter full_name")
+			}
+			else if (username === ""){
+                console.log("mandan")
+				$('#error1').html("enter username ")
+			}
+			else if (email === ""){
+				$('#error1').html("enter email ")
+				console.log("haii")
+			}
+
+            else if (atposition<2 ||dotposition<atposition+2 || dotposition+2>=email.length){
+				$('#error1').html("enter enter valid email")
+			}
+
+			else if (mobile_number === ""){
+				$('#error1').html("enter mobile number")
+			}
+			
+			else if (qualification === ""){
+				$('#erro1').html("enter qualification")
+			}
+			else if (experience === ""){
+				$('#error1').html("enter experience")
+			}
+			
+            else if (password1 === ""){
+                $('#error1').html("enter password")
+            }
+            else if (password2 === ""){
+                $('#error1').html("enter confirm password")
+            }
+            
+
+			else{
+				console.log('hiiiiiiiiiiiiiii')
+				$.ajax({
+					
+					url:'/admin1/addteacher/',
+					method:'POST',
+					data: data,
+					dataType: 'json',
+					
+					success:function(data){
+						if(data =="true"){
+							alert("Teacher added");
+							window.location.replace('/admin1/Teacher/')
+						}
+						else if (data == "false1"){
+							$("#error1").html('student already exist')
+						}
+						else if (data == "false2"){
+							$("#error1").html('username already exist')
+						}
+						else if (data == "false3"){
+							$("#error1").html('standrd already exist')
+						}
+						else if (data == "false4"){
+							$("#error1").html('password mismatching')
+						}
+						else if (data == "false5"){
+							$('#error1').html('This number already exist')
+						}
+                        else if (data == "false6"){
+                            $("#error1").html('This email already exist')
+                        }
+						
+						
+	
+					}
+				})
+			}
+	
+	
+		})
+	
+	
+	</script>
+
+
+
+{% endblock %}

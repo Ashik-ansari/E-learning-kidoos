@@ -1,0 +1,367 @@
+{% extends 'admin1/base.html' %}
+{% load static %}
+{% block content %}
+
+
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#coupon">
+                        Add standards
+                      </button>
+
+                      <div class="modal fade" id="coupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">add standard</h5>
+                             
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                             
+                            <div class="modal-body">
+                            <form>
+                                {% csrf_token %}
+                                
+                                {% for message in messages %}
+                                <h5> {{message}} </h5>
+                                {% endfor %}
+                                
+                               <input type="text" placeholder="standard" name="standard" id="standard" style="width: 60%;" required />
+                               <br>
+                               <br>
+                               <input type="number" placeholder="price" name="price" id="price" style="width: 60%;" required />
+                               <br><br>
+                               <input type="number" placeholder="durations" name="duration" id="duration" style="width: 60%;"/>
+                               <br><br>
+                               <input type="text" placeholder="subject1" name="sub1" id="sub1" style="width: 60%;"/>
+                               <br><br>
+                               <input type="text" placeholder="subject2" name="sub2" id="sub2" style="width: 60%;"/>
+                               <br><br>
+                               <input type="text" placeholder="subject3" name="sub3" id="sub3" style="width: 60%;"/>
+                               <br><br>
+
+                                     <img id="cropped" class="cropped" src="{{myclass.image}}"
+												                onclick="openImage1()" onchange="preview1()" 
+												                    style="height: 10rem; width: 10rem;" >
+										
+										
+											                  <input type="file" name="image1" id="image1"  
+												                  oninput="cropped.src=window.URL.createObjectURL(this.files[0])" accept="image/*" >
+
+
+                               <!---modal imgae-->
+
+                               <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Crop Image</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<div class="box-2">
+													<div class="result"></div>
+												</div>
+											</div>
+
+											<div class="modal-footer">
+
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">
+													Close
+												</button>
+
+												<button type="button" id="load" class="btn save btn-primary">
+													Save changes
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+                            
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" id="createBtn" class="btn btn-primary">submit</button>
+                          
+
+
+
+                            </div>
+                          </form>
+
+                          <!-- <form enctype="multipart/form-data" method="POST" action="">
+                             -->
+
+                        </div>
+                          </div>
+                        </div>
+                      </div>  
+
+                    <div class="col-5 align-self-center">
+                        <h4 class="page-title">courses</h4>
+                    </div>
+                    <div class="col-7 align-self-center">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <a href="#">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">Basic Table</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                               
+                                <h6 class="card-title m-t-40"><i class="m-r-5 font-18 mdi mdi-numeric-1-box-multiple-outline"></i> Table With Outside Padding</h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>standards</th>
+                                                <th>price</th>
+                                                <th>duration</th>
+                                                <th>image</th>
+                                                <th>video</th>
+                                                <th>sub1</th>
+                                                <th>sub2</th>
+                                                <th>sub3</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for myclass in Myclass  %}
+                                            <tr>
+                                            
+                                              <td>{{myclass.standard}}</td>
+                                              <td>{{myclass.price}}</td>
+                                              <td>{{myclass.duration}}</td>
+                                              <td>{{myclass.imgurl5}}</td>
+                                              <td>
+                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#video">
+                                                video
+                                              </button>
+                                            </td>
+                                              <td>{{myclass.sub1}}</td>
+                                              <td>{{myclass.sub2}}</td>
+                                              <td>{{myclass.sub3}}</td>
+                                            
+                                              <td><a href="{%  url 'class_delete' pk=myclass.id %}" class="btn btn-danger">Delete</a></i></td>                                            
+                                                      
+                                            </tr>
+                                            {% endfor %}
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--sample vdieo-->
+                                
+                                <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">sample video</h5>
+                                         
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                         
+                                        <div class="modal-body">
+                                           {% for myclass in Myclass %} 
+                                        <form action="{% url 'sample_video' pk=myclass.id %}" enctype="multipart/form-data" method="POST">
+                                            {% csrf_token %}
+                                            {% endfor %}
+                                            
+                                           <input type="file" placeholder="sample video" name="video" id="video" style="width: 60%;" required />
+                                           <br>
+                                           
+                                        
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary">submit</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  
+                                 <!--end sample video--> 
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+<!--cropper-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js" integrity="sha512-E4KfIuQAc9ZX6zW1IUJROqxrBqJXPuEcDKP6XesMdu2OV4LW7pj8+gkkyx2y646xEV7yxocPbaTtk2LQIJewXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css"> 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+<script>
+  var imgSrc;
+  let result = document.querySelector(".result"),
+      save = document.querySelector(".save"),
+      cropped = document.querySelector(".cropped"),
+      upload = document.querySelector("#image1"),
+      cropper = "";
+
+  upload.addEventListener("change", (e) => {
+console.log("ashuj")
+      if (e.target.files.length) {
+          // start file reader
+          const reader = new FileReader();
+
+          reader.onload = (e) => {
+              if (e.target.result) {
+                  // create new image
+                  $("#exampleModalCenter").modal("show");
+                  let img = document.createElement("img");
+                  img.id = "image";
+                  img.src = e.target.result;
+
+                  // clean result before
+                  result.innerHTML = "";
+                  // append new image
+
+                  result.appendChild(img);
+                  // init cropper
+                  cropper = new Cropper(img, {
+                      viewMode: 2,
+                      aspectRatio: 5 / 5,
+                      autoCropArea: 1,
+        cropBoxResizable: false,
+                      crop: function (e) {
+                          console.log(e.detail.x);
+                          console.log(e.detail.y);
+                      }
+                  });
+
+              }
+          };
+          reader.readAsDataURL(e.target.files[0]);
+      }
+  });
+
+  save.addEventListener("click", (e) => {
+      e.preventDefault();
+      // get result to data uri
+      imgSrc = cropper
+          .getCroppedCanvas({
+              width: 300, // img disp value
+          })
+          .toDataURL();
+      $("#exampleModalCenter").modal("hide");
+      cropped.src = imgSrc;
+
+  });
+
+
+function openImage1() {
+
+$('#image1').click()
+}
+
+
+</script>
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+
+<script>
+	$('#createBtn').click(function(){
+    console.log("pop")
+		var formData = new FormData();
+		formData.append("standard", document.getElementById("standard").value);
+		formData.append("price", document.getElementById("price").value);
+		formData.append("duration", document.getElementById("duration").value);
+		formData.append("sub1", document.getElementById("sub1").value);
+    formData.append("sub2", document.getElementById("sub2").value);
+    formData.append("sub3", document.getElementById("sub3").value);
+		formData.append("image1",imgSrc);
+		console.log(image, 'zxcvbnm.........')
+		            
+
+		formData.append('csrfmiddlewaretoken', '{{csrf_token}}');
+
+		//var ext = image.value.split(".")
+		//ext = ext[ext.length - 1].toLowerCase();
+  		//var arrayExtensions = ["jpg", "png", "svg", "jpeg"];
+
+		  if (image1.value == '') {
+			$('#message').html('Upload Thumbnail')
+			console.log("askkkk")
+		}
+		
+		else{
+			console.log("haud")
+			$.ajax({
+				url: '/admin1/add_standard/',
+				type: 'POST',
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: 'JSON',
+				success: function(data){
+					if (data == 'true'){
+						window.location.replace('/admin1/standard/')
+					}
+				}
+
+
+			})
+		}
+		
+		
+	})
+</script>
+
+
+
+
+            
+{% endblock %}

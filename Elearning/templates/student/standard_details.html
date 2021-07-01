@@ -1,0 +1,235 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+            
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{{myclass.imgurl5}}" alt=""/>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{myclass.standard}}
+                                    </h5>
+                                    <h6>
+                                        best to create a friendly environment for the students to sit and start learning. At home parents can help them understand the concepts or revise the course they studied in school
+                                    </h6>
+
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <!--iamge-->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Standard</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{myclass.standard}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Subjects</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>-{{myclass.sub1}}</p>
+                                                <p>-{{myclass.sub2}}</p>
+                                                <p>-{{myclass.sub3}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>duration</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{myclass.duration}} Month</p>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Payment</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p style="font-size: x-large; font">{{myclass.price}}</p>
+                                            </div>
+                                        </div> -->
+                                        <br>
+                                        <b><h5 class="card-text" style="color: rgb(38, 70, 8);">
+                                            Total Amount for your course :
+                                            <strong id="total-amount" >{{myclass.price}} </strong> rs
+                                        </h5></b>    
+                                        <div class="row lower">
+                                            <div class="col text-left"><a href="{% url 'payment' pk=myclass.id %}">
+                                        <button class="btn" >checkout</button>
+                                    </a></div>
+                                </div>
+                            </div>   
+
+                        
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4>Demo Class</h4>
+                        <video width="420" height="340" controls>
+                            <source src="{{myclass.videourl}}" type="video/mp4">
+
+                          Your browser does not support the video tag.
+                          </video>
+                    </div>
+                    
+
+                </div>
+        </div>
+
+
+
+        <style>
+
+            body{
+                background: -webkit-linear-gradient(left, #257679, #08bbec);
+            }
+            .emp-profile{
+                padding: 3%;
+                margin-top: 3%;
+                margin-bottom: 3%;
+                border-radius: 0.5rem;
+                background: #fff;
+            }
+            .profile-img{
+                text-align: center;
+            }
+            .profile-img img{
+                width: 70%;
+                height: 100%;
+            }
+            .profile-img .file {
+                position: relative;
+                overflow: hidden;
+                margin-top: -20%;
+                width: 70%;
+                border: none;
+                border-radius: 0;
+                font-size: 15px;
+                background: #212529b8;
+            }
+            .profile-img .file input {
+                position: absolute;
+                opacity: 0;
+                right: 0;
+                top: 0;
+            }
+            .profile-head h5{
+                color: #333;
+            }
+            .profile-head h6{
+                color: #0062cc;
+            }
+            .profile-edit-btn{
+                border: none;
+                border-radius: 1.5rem;
+                width: 70%;
+                padding: 2%;
+                font-weight: 600;
+                color: #6c757d;
+                cursor: pointer;
+            }
+            .proile-rating{
+                font-size: 12px;
+                color: #818182;
+                margin-top: 5%;
+            }
+            .proile-rating span{
+                color: #495057;
+                font-size: 15px;
+                font-weight: 600;
+            }
+            .profile-head .nav-tabs{
+                margin-bottom:5%;
+            }
+            .profile-head .nav-tabs .nav-link{
+                font-weight:600;
+                border: none;
+            }
+            .profile-head .nav-tabs .nav-link.active{
+                border: none;
+                border-bottom:2px solid #0062cc;
+            }
+            .profile-work{
+                padding: 14%;
+                margin-top: -15%;
+            }
+            .profile-work p{
+                font-size: 12px;
+                color: #818182;
+                font-weight: 600;
+                margin-top: 10%;
+            }
+            .profile-work a{
+                text-decoration: none;
+                color: #495057;
+                font-weight: 600;
+                font-size: 14px;
+            }
+            .profile-work ul{
+                list-style: none;
+            }
+            .profile-tab label{
+                font-weight: 600;
+            }
+            .profile-tab p{
+                font-weight: 600;
+                color: #0062cc;
+            }
+
+
+            
+            .btn {
+                background-color: rgb(23, 4, 189);
+                border-color: rgb(23, 4, 189);
+                color: white;
+                width: 80%;
+                font-size: 0.7rem;
+                margin: 4vh 0 1.5vh 0;
+                padding: 1.5vh;
+                border-radius: 0
+            }
+            
+            .btn:focus {
+                box-shadow: none;
+                outline: none;
+                box-shadow: none;
+                color: white;
+                -webkit-box-shadow: none;
+                -webkit-user-select: none;
+                transition: none
+            }
+
+        </style>
+
+        {% endblock %}

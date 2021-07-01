@@ -1,0 +1,108 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="card py-5 px-3">
+        <h5 class="m-0">Mobile phone verification</h5><span class="mobile-text">Enter the code we just send on your mobile phone <b class="text-danger">+91 86684833</b></span>
+
+        <input type="tel" id="otp" class="form-control" autofocus="">
+
+        <span id="error3" class="error1" > </span>
+
+         <button type="button" id="otp1" class="btn-primary">submit</button>
+
+            <div class="text-center mt-5"><span class="d-block mobile-text">Don't receive the code?</span><span class="font-weight-bold text-danger cursor">Resend</span></div>
+    </div>
+</div>
+
+
+
+
+<style>
+    .card {
+        width: 350px;
+        padding: 10px;
+        border-radius: 20px;
+        background: #fff;
+        border: none;
+        height: 350px;
+        position: relative
+    }
+    
+    .container {
+        height: 100vh
+    }
+    
+    body {
+        background: #eee
+    }
+    
+    .mobile-text {
+        color: #989696b8;
+        font-size: 15px
+    }
+    
+    .form-control {
+        margin-right: 12px
+    }
+    
+    .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #ff8880;
+        outline: 0;
+        box-shadow: none
+    }
+    
+    .cursor {
+        cursor: pointer
+    }
+</style>
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$('#otp1').click(function(){
+    var otp=$('#otp').val()
+    console.log(otp)
+
+    var data = {
+        'csrfmiddlewaretoken':'{{csrf_token}}',
+        'otp1':otp,
+
+    }
+    if (otp === ""){
+        $('#error3').html("enter otp")
+    }
+    else{
+
+        $.ajax({
+            url:'/otp_validate/',
+            method:'POST',
+            data:data,
+            dataType:'json',
+            success:function(data){
+                if (data=='true'){
+                    window.location.replace('/')
+                }
+                if (data=='false'){
+                    $('#error3').html("invalid otp")
+                }
+            
+            }
+        })
+    }
+})
+
+</script>
+
+
+
+{% endblock %}

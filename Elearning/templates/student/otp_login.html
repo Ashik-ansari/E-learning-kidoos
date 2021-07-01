@@ -1,0 +1,222 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+    <br>
+
+</div>
+
+
+<form action="" method="" >
+    {% csrf_token %}
+	<div class="col-sm-4 bg-c-lite-green user-profile" style="margin-left: 30%;">
+        <div class="card-block text-center text-white">
+            <div class="row" > 
+                <div class="square" >
+                    <span id="error"></span>
+                    <input type="tel"  placeholder="mobile_number" id="mobile" style="background-color: bisque;" />  <br><br>
+
+                    <button type="button" id="otp" class="btn-primary">get otp</button>
+
+                    
+                </div>
+                    
+            </div> 
+            
+        </div>
+    </div>
+</form>	
+	
+
+
+
+<style>
+    body {
+        background-color: #e0ecbf
+    }
+    .square{
+       
+        width: 90%;
+    }
+    
+    .padding {
+        padding: 3rem !important
+    }
+    
+    .user-card-full {
+        overflow: hidden
+    }
+    
+    .card {
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        border: none;
+        margin-bottom: 30px
+    }
+    
+    .m-r-0 {
+        margin-right: 0px
+    }
+    
+    .m-l-0 {
+        margin-left: 0px
+    }
+    
+    .user-card-full .user-profile {
+        border-radius: 5px 0 0 5px
+    }
+    
+    .bg-c-lite-green {
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+    }
+    
+    .user-profile {
+        padding: 20px 0
+    }
+    
+    .card-block {
+        padding: 1.25rem
+    }
+    
+    .m-b-25 {
+        margin-bottom: 25px
+    }
+    
+    .img-radius {
+        border-radius: 5px
+
+    }
+    
+    h6 {
+        font-size: 14px
+    }
+    
+    .card .card-block p {
+        line-height: 25px
+    }
+    
+    @media only screen and (min-width: 1400px) {
+        p {
+            font-size: 14px
+        }
+    }
+    
+    .card-block {
+        padding: 1.25rem
+    }
+    
+    .b-b-default {
+        border-bottom: 1px solid #e0e0e0
+    }
+    
+    .m-b-20 {
+        margin-bottom: 20px
+    }
+    
+    .p-b-5 {
+        padding-bottom: 5px !important
+    }
+    
+    .card .card-block p {
+        line-height: 25px
+    }
+    
+    .m-b-10 {
+        margin-bottom: 10px
+    }
+    
+    .text-muted {
+        color: #919aa3 !important
+    }
+    
+    .b-b-default {
+        border-bottom: 1px solid #e0e0e0
+    }
+    
+    .f-w-600 {
+        font-weight: 600
+    }
+    
+    .m-b-20 {
+        margin-bottom: 20px
+    }
+    
+    .m-t-40 {
+        margin-top: 20px
+    }
+    
+    .p-b-5 {
+        padding-bottom: 5px !important
+    }
+    
+    .m-b-10 {
+        margin-bottom: 10px
+    }
+    
+    .m-t-40 {
+        margin-top: 20px
+    }
+    
+    .user-card-full .social-link li {
+        display: inline-block
+    }
+    
+    .user-card-full .social-link li a {
+        font-size: 20px;
+        margin: 0 10px 0 0;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out
+    }
+
+</style>
+
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    $('#otp').click(function(){
+        var mobile1=$('#mobile').val()
+        var mobile_length= $('#mobile').val().length
+
+        var data = {
+            'csrfmiddlewaretoken':'{{csrf_token}}',
+            'mobile':mobile1,
+
+        }
+        if (mobile_length<10){
+            $('#error').html('invalid format')
+        }
+
+        else{
+            $.ajax({
+                url:'/otp_request/',
+                method:'POST',
+                data:data,
+                dataType:'json',
+                success:function(data){
+                    if (data=='true'){
+                        window.location.replace('/otp_validate/')
+                    }
+                    //if (data=='false'){
+                      //  $('#error').html("invalid number")
+                    //}
+                }
+            })
+        }
+    })
+
+</script>
+
+
+
+{% endblock %}
+

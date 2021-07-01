@@ -1,0 +1,100 @@
+{% extends 'admin1/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+
+            <div class="col-5 align-self-center">
+                <h4 class="page-title">Teachers</h4>
+            </div>
+            <div class="col-7 align-self-center">
+                <div class="d-flex align-items-center justify-content-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Teachers data</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                      <a href="{% url 'addteacher' %}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#coupon">
+                            Add Teacher
+                          </button></a>
+                       
+                        <h6 class="card-title m-t-40"><i class="m-r-5 font-18 mdi mdi-numeric-1-box-multiple-outline"></i> Table With Outside Padding</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>full_name</th>
+                                        <th>username</th>
+                                        <th>Email</th>
+                                        <th>mobile</th>
+                                        <th>qualification</th>
+                                        <th>experience</th>
+                                        <th>standard</th>
+                                        <th>date</th>
+                                        
+                                    
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for teacher in  Teachers  %}
+                                    <tr>
+                                    
+                                      <td>{{teacher.full_name}}</td>
+                                      <td>{{teacher.username}}</td>
+                                      <td>{{teacher.email}}</td>
+                                      <td>{{teacher.mobile_number}}</td>
+                                      <td>{{teacher.qualification}}</td>
+                                      <td>{{teacher.experience}}</td>
+                                      <td>{{teacher.standard.standard}}</td>
+                                      <td>{{teacher.date}}</td>
+                                      
+
+                                      {% if teacher.active == True %}                          
+                                      <td scope="row" data-label="blockuser">  <a href="{%  url 'blockteacher' pk=teacher.id %}" class="fas fa-lock-open"></a></i></td>				
+                                     {% else %}
+                                     <td scope="row" data-label="blockuser"> <a href="{%  url 'blockteacher' pk=teacher.id %}" class="fas fa-lock"></a></i></td>
+                                         {% endif %}	
+                                     <td scope="row" data-label="userdelete"><a href="{%  url 'teacherdelete' pk=teacher.id %}" class="fas fa-trash-alt"></a></i></td>							
+                                              
+                                      
+                                    
+                                      
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                        
+
+
+
+{% endblock %}
